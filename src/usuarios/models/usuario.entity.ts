@@ -1,7 +1,6 @@
 
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
-import { Album } from "../../albums/models/albums.entity";
-import { PerformerAlbum } from "./usuario.red.entity";
+
 
 @Entity()
 export class Usuario {
@@ -13,8 +12,9 @@ export class Usuario {
     
     @Column()
     telefono: string;
-
-    @ManyToMany(() => Album, album => album.performers)
-    albums: PerformerAlbum[];
+    @Column()
+  fotos: string;
+  @Column()
+  redes: string;
     
 }

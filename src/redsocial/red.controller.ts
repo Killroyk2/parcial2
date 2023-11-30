@@ -1,23 +1,15 @@
 import { Controller, Get, Post, Param, Body } from '@nestjs/common';
-import { TrackService } from './red.service';
-import { Track } from './models/red.entity';
+import { RedService } from './red.service';
+import { Red } from './models/red.entity';
 
-@Controller('tracks')
-export class TrackController {
-  constructor(private readonly trackService: TrackService) {}
+@Controller('redsocial')
+export class RedController {
+  constructor(private readonly redService: RedService) {}
 
-  @Post(':albumId')
-  create(@Param('albumId') albumId: string, @Body() track: Track) {
-    return this.trackService.create(albumId, track);
+//post para crear una red social
+  @Post()
+  create(@Body() red: Red) {
+    return this.redService.create(red);
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.trackService.findOne(id);
-  }
-
-  @Get()
-  findAll() {
-    return this.trackService.findAll();
-  }
+  
 }

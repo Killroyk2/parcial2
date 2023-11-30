@@ -1,28 +1,28 @@
 import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
 import { FotoService } from './foto.service';
-import { Album } from './models/foto.entity';
+import { Foto } from './models/foto.entity';
 
 @Controller('fotos')
 export class FotosController {
-  constructor(private readonly fotosService: FotosService) {}
+  constructor(private readonly fotosService: FotoService) {}
 
   @Post()
-  create(@Body() album: Album) {
-    return this.albumService.create(album);
+  create(@Body() foto: Foto) {
+    return this.fotosService.create(foto);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.albumService.findOne(id);
+    return this.fotosService.findOne(id);
   }
 
   @Get()
   findAll() {
-    return this.albumService.findAll();
+    return this.fotosService.findAll();
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return this.albumService.delete(id);
+    return this.fotosService.remove(id);
   }
 }

@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
-import { TrackController } from './red.controller';
-import { TrackService } from './red.service';
+import { RedController } from './red.controller';
+import { RedService } from './red.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Track } from './models/red.entity';
-import { Album } from '../albums/models/albums.entity';
+import { Red } from './models/red.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Track, Album])],
-  controllers: [TrackController],
-  providers: [  TrackService]
+  imports: [TypeOrmModule.forFeature([Red])],
+  controllers: [RedController],
+  providers: [  RedService]
 })
-export class TrackModule {}
+export class RedModule {}

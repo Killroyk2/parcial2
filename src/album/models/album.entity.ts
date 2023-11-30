@@ -6,12 +6,15 @@ export class Album {
     id: number;
 
     @Column()
-    fechaInicio: Date;
+    fechaInicio: string;
     
     @Column()
-    fechaFin: Date;
+    fechaFin: string;
 
     @Column()
     titulo: string;
+
+    @Column()
+  fotos: string;
 
 }

@@ -1,42 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import {Album} from './models/foto.entity';
+import {Foto} from './models/foto.entity';
 
 @Injectable()
 export class FotoService {
   constructor(
-    @InjectRepository(Album)
-    private albumRepository: Repository<Album>,
+    @InjectRepository(Foto)
+    private fotoRepository: Repository<Foto>,
   ) {}
 
-  async create(album: Album): Promise<Album> {
-    if (!album.name || !album.description) {
-      throw new Error('Album name and description are empty');
+  async create(foto: Foto): Promise<Foto> {
+    if (foto.ISO >= 100 && foto.ISO <= 6400 && foto.velObturacion >= 2 && foto.velObturacion <= 250 && foto.apertura >= 1 && foto.apertura <= 32) {
+      throw new Error('No se puede crear foto');
     }
-    return this.albumRepository.save(album);
+    return this.fotoRepository.save(foto);
   }
 
-  async findOne(id: string): Promise<Album> {
-    return this.albumRepository.findOne({
-      where: { id: Number(id) },
-      relations: ['tracks', 'performers.performer'],
+
+  findOne(id: string): Promise<Foto> {
+    return this.fotoRepository.findOne({
+      where: { id: Number(id) }
     });
   }
-  
-  
-  
 
-  findAll(): Promise<Album[]> {
-    return this.albumRepository.find();
+  findAll(): Promise<Foto[]> {
+    return this.fotoRepository.find();
   }
 
-  async delete(id: string): Promise<void> {
-    const album = await this.albumRepository.findOne({ where: { id: Number(id) }, relations: ['tracks'] });
-    if (album.tracks.length > 0) {
-      throw new Error('Cant delete album with tracks');
-    }
-    await this.albumRepository.delete(Number(id));
+  async remove(id: string): Promise<void> {
+    await this.fotoRepository.delete(id);
   }
   
 }

@@ -1,6 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany , ManyToMany} from "typeorm";
-import { Track } from "../../tracks/models/track.entity";
-import { PerformerAlbum } from "../../performer/models/performer-album.entity";
 
 @Entity()
 export class Foto {
@@ -19,9 +17,9 @@ export class Foto {
 	@Column() 
 	fecha:Date; 
 
- 	@OneToMany(() => Track , track=>track.album) 
-	tracks :Track[] ;
+	@Column()
+  albums: string;
 
-  @OneToMany(() => PerformerAlbum, performerAlbum => performerAlbum.album)
-  performers: PerformerAlbum[];
+  @Column()
+  usuarios: string;
 }

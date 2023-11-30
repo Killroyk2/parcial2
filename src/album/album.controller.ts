@@ -1,36 +1,25 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
-import { PerformerService } from './album.service';
-import { Performer } from './models/album.entity';
+import { Controller, Get, Post, Param, Body, Delete } from '@nestjs/common';
+import { AlbumService } from './album.service';
+import { Album } from './models/album.entity';
 
-@Controller('performers')
-export class PerformerController {
-  constructor(private readonly performerService: PerformerService) {}
+@Controller('albums')
+export class AlbumController {
+  constructor(private readonly albumService: AlbumService) {}
 
   @Post()
-  create(@Body() performer: Performer) {
-    return this.performerService.create(performer);
+  create(@Body() album: Album) {
+    return this.albumService.create(album);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.performerService.findOne(id);
+    return this.albumService.findOne(id);
+  }
+  //delete
+
+  @Delete()
+  delete(@Param('id') id: string) {
+    return this.albumService.remove(id);
   }
 
-  @Get()
-  findAll() {
-    return this.performerService.findAll();
-  }
-
-  @Post(':albumId/add-performer/:performerId')
-  async addPerformerToAlbum(
-    @Param('albumId') albumId: number,
-    @Param('performerId') performerId: number,
-  ) {
-    try {
-      await this.performerService.addPerformerToAlbum(albumId, performerId);
-      return { message: 'Performer added to album successfully' };
-    } catch (error) {
-      return { error: error.message };
-    }
-  }
 }

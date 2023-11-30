@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Album } from '../albums/models/albums.entity';
-import { Performer } from '../performer/models/performer.entity';
-import { Track } from '../tracks/models/track.entity';
-import { PerformerAlbum } from '../performer/models/performer-album.entity';
+import { Album } from '../album/models/album.entity';
+import { Usuario } from '../usuarios/models/usuario.entity';
+import { Foto } from '../foto/models/foto.entity';
+import { Red } from '../redsocial/models/red.entity';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { PerformerAlbum } from '../performer/models/performer-album.entity';
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [Album, Performer, Track, PerformerAlbum],
+        entities: [Album, Usuario, Foto, Red],
         synchronize: true,
       }),
     }),

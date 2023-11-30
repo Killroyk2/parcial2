@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Album } from "../../albums/models/albums.entity";
+
 
 @Entity()
 export class Red {
@@ -12,6 +12,7 @@ export class Red {
     @Column()
     slogan: string;
 
-    @ManyToOne(() => Album, album => album.tracks)
-    album: Album;
+    @Column()
+  usuarios: string;
+
 }

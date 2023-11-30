@@ -1,35 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Track } from './models/red.entity';
-import { Album } from '../albums/models/albums.entity';
-
+import { Red } from './models/red.entity';
 @Injectable()
-export class TrackService {
+export class RedService {
   constructor(
-    @InjectRepository(Track)
-    private trackRepository: Repository<Track>,
-    @InjectRepository(Album)
-    private albumRepository: Repository<Album>,
+    @InjectRepository(Red)
+    private redRepository: Repository<Red>
+  
   ) {}
 
-  async create(albumId: string, track: Track): Promise<Track> {
-    if (track.duration <= 0) {
-      throw new Error('Track duration must be greater than 0');
+  async create(red: Red): Promise<Red> {
+    if (red.slogan.length <=0 && red.slogan.length >= 20) {
+      throw new Error('No se puede crear red social sin nombre');
     }
-    const album = await this.albumRepository.findOne({where:{id:Number(albumId)}});
-    if (!album) {
-      throw new Error('Album does not exist');
-    }
-    track.album = album;
-    return this.trackRepository.save(track);
-  }
-
-  findOne(id: string): Promise<Track> {
-    return this.trackRepository.findOne({ where: { id: Number(id) } });
-  }
-
-  findAll(): Promise<Track[]> {
-    return this.trackRepository.find();
+    return this.redRepository.save(red);
   }
 }

@@ -27,41 +27,8 @@ export class AlbumService {
     });
   }
   
-//delete album
+
   async remove(id: string): Promise<void> {
     await this.albumRepository.delete(id);
-  }
-  
-
-
-  async addFotoToAlbum(albumId: number, fotoId: number): Promise<void> {
-   /*
-    const foto = await this.albumRepository.findOne({ where: { id: Number(performerId) } });
-    const album = await this.albumRepository.findOne({ where: { id: albumId }, relations: ['performers'] });
-  
-    if (!performer || !album) {
-      throw new Error('Performer or album not found');
-    }
-  
-    if (album.performers.length >= 3) {
-      throw new Error('Album cannot have more than three performers');
-    }
-  
-    const performerAlbum = new PerformerAlbum();
-    performerAlbum.performer = performer;
-    performerAlbum.album = album;
-  
-    // Save the PerformerAlbum entity to the database
-    await this.performerAlbumRepository.save(performerAlbum);
-  
-    const updatedAlbum = await this.albumRepository.findOne({ 
-      where: { id: album.id }, 
-      relations: ['performers.performer']  // Load the Performer entities
-    });
-  
-    if (!updatedAlbum) {
-      throw new Error('Failed to reload the album');
-    }
-    */
   }
 }  
