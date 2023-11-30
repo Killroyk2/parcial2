@@ -5,16 +5,15 @@ export class Album {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: true })
     fechaInicio: string;
     
-    @Column()
+    @Column({ nullable: true })
     fechaFin: string;
-
-    @Column()
+    @Column({ nullable: true })
     titulo: string;
 
-    @Column()
+    @Column({ nullable: true })
   fotos: string;
 
 }
